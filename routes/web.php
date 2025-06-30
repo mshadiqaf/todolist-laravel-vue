@@ -15,6 +15,7 @@ Route::get('dashboard', function () {
 Route::middleware(['auth'])->group( function() {
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
 });
 
 require __DIR__.'/settings.php';
