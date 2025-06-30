@@ -12,8 +12,9 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group( function() {
+Route::middleware(['auth'])->group( function() {
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
 });
 
 require __DIR__.'/settings.php';

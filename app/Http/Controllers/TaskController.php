@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,7 +13,14 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Inertia::render('tasks/Index', []);
+        $tasks = Task::with('categories')
+            ->where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+            
+        return Inertia::render('tasks/Index', [
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -20,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('tasks/Create', []);
     }
 
     /**
